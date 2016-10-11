@@ -1,0 +1,20 @@
+/*
+ * Stephen Reese u0396206
+ this class make a node class that contants the vectors
+ */
+#include <iostream>
+#include <vector>
+using namespace std;
+class node{
+    //checks if word or not
+    bool isWord;
+    //vector of nodes
+    vector<node> vect;
+public:
+    //constructor
+    node();
+    //deconstructor
+    ~node();
+    //add another node
+    void addNode(char i);
+};

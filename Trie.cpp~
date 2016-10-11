@@ -1,0 +1,112 @@
+/*
+ * Stephen Reese u0396206
+ This class makes a trie holding letters that make up words.
+*/
+
+#include "Trie.h"
+#include <iostream>
+
+    //default constructor
+    Trie::Trie() {
+        root = new TrieNode();
+        //allTheWords = new std::vector<std::string>();
+        //addWord(word);
+    }
+/*
+    //destructor
+// ~ Trie::Trie(){}
+    //copy constructor
+    Trie::Trie(const Trie& copyTrie){
+        tNode = copyTrie.tNode;
+    }
+    //copy overload =
+    Trie& Trie::operator =(Trie copyTrie){
+        std::swap(tNode, copyTrie.tNode);
+        return *this;
+    }
+
+*/
+    //adds a word
+    void Trie::addWord(std::string word){
+        //transform(word.begin(), word.end(), word.begin(), ::tolower);
+        TrieNode* tempNode;
+        tempNode = root;
+        unsigned int i;
+        for(i = 0; i < word.length(); i++){
+            int c = word[i] - 'a';
+            if(tempNode->children[c] == nullptr){
+                TrieNode *nextNode = new TrieNode();                ;
+                tempNode->children[c] = nextNode;
+                if(i == word.length() - 1){
+                    std::cout<<"enter here true"<<std::endl;
+
+                    nextNode->isWord = true;
+                }
+                tempNode = nextNode;
+            }
+            else{
+                tempNode = tempNode->children[c];
+                if(i == word.length() - 1){
+                    tempNode->isWord = true;
+                }
+            }
+        }
+    }
+
+
+    //checks if a word is in the Trie
+    bool Trie::isWord(std::string word){
+        //std::transform(word.begin(), word.end(), word.begin(), ::tolower);
+        TrieNode* tempNode;
+        tempNode = root;
+        unsigned int i;
+        for(i = 0; i < word.length(); i++){
+            //the char minus 'a' gives us an index
+            int c = word[i] - 'a';
+            std::cout << c << std::endl;
+            std::cout << word[i] << std::endl;
+            if(tempNode->children[c] != nullptr){
+                tempNode = tempNode->children[c];
+                if(i == word.length() - 1){
+                    return  tempNode->isWord;
+                }
+            }
+            else{
+                return false;
+            }
+        }
+        return false;
+    }
+
+    //give all the words with the given prefirx
+    std::vector<std::string> Trie::allWordsWithPrefix (std::string prefix){
+        allTheWords.clear();
+        TrieNode* parent = root;
+        unsigned int i;
+        for(i = 0; i < prefix.length(); i++){
+            int c = prefix[i] - 'a';
+            if(parent->children[c] == nullptr){
+                return allTheWords;
+            }
+            else{
+                parent = parent->children[c];
+            }
+        }
+        findWords(prefix, parent);
+        return allTheWords;
+    }
+
+    void Trie::findWords(std::string prefrix, TrieNode* parentNode){
+        std::string word = prefrix;
+        if(parentNode->isWord){
+            allTheWords.push_back(word);
+        }
+        unsigned int i;
+        for(i = 0; i < 26; i++){
+            if(parentNode->children[i] != nullptr){
+                char c = i + 'a';
+                word += c;
+                findWords(word, parentNode->children[i]);
+            }
+        }
+    };

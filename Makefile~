@@ -1,0 +1,24 @@
+
+CC = g++
+CFLAGS = -Wall -std=c++11
+
+INCLUDE = .
+
+TrieTest : TrieTest.o Trie.o TrieNode.o
+	$(CC) $(CFLAGS) -o TrieTest TrieTest.o Trie.o TrieNode.o
+
+Trie.o : $(INCLUDE)/ Trie.h Trie.cpp
+	$(CC) $(CFLAGS) -c -I$(POINTLIBINCLUDE) Trie.cpp
+
+TrieNode.o : $(INCLUDE)/ TrieNode.h TrieNode.cpp
+	$(CC) $(CFLAGS) -c -I$(POINTLIBINCLUDE) TrieNode.cpp
+
+TrieTest.o : TrieTest.cpp $(INCLUDE)/ Trie.h TrieNode.h
+	$(CC) $(CFLAGS) -c -I$(POINTLIBINCLUDE) TrieTest.cpp
+
+# add a make clean and make test option
+clean:
+	rm TrieTest *.o
+
+test:
+	./TrieTest

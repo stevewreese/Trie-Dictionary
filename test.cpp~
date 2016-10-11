@@ -1,0 +1,11 @@
+#include<iostream>
+
+int main(){
+    char a = 'e';
+    int i = 'a';
+    char c = i;
+    std::cout << i << " " << c << std::endl;
+    return 0;
+
+
+}

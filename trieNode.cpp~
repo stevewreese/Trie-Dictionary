@@ -1,0 +1,16 @@
+/*
+ * Stephen Reese u0396206
+ this class make a node class that contants the vectors
+*/
+#include <iostream>
+#include <vector>
+using namespace std;
+class node{
+
+    //constructor
+    node(){}
+    //deconstructor
+    ~node(){}
+    //add another node
+    void addNode(char i){}
+};

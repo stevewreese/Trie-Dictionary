@@ -1,0 +1,41 @@
+/*
+ * Stephen Reese u0396206
+ this class make a node class that contants the vectors
+*/
+#include "TrieNode.h"
+#include <iostream>
+
+
+    //constructor
+    TrieNode::TrieNode(){
+         isWord = false;
+         //children = new TrieNode[26];
+         for (int i=0; i<26; i++){
+             children[i]= nullptr;
+         }
+    }
+//copy constructor
+    TrieNode::TrieNode(const TrieNode& copyNode){
+        isWord = copyNode.isWord;
+        for (int i=0; i<26; i++){
+            children[i]= copyNode.children[i];
+        }
+
+    }
+
+    //copy overload =
+    TrieNode& TrieNode::operator =(TrieNode copyNode){
+        std::swap(isWord, copyNode.isWord);
+        std::swap(children, copyNode.children);
+        return *this;
+    };
+
+/*
+   ~TrieNode(){
+       unsigned int i;
+       for(i = 0; i < 26; i++){
+           if(children[i] != nullptr){
+               children[i] == nullptr;
+           }
+       }
+*/

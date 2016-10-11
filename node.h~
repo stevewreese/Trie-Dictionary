@@ -1,0 +1,9 @@
+/*
+ * Stephen Reese u0396206
+ this class make a node class that contants the vectors
+ */
+#inclu
+class node{
+    bool isWord;
+    vector<node> vect;
+};
